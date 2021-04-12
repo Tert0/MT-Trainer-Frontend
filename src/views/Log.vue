@@ -19,7 +19,7 @@
                   <td>{{ logentry.factor2 }}</td>
                   <td>{{ logentry.user_result }}</td>
                   <td :class="{green: logentry.correct, red: !logentry.correct}">{{ logentry.correct ? 'TRUE' : 'FALSE' }}</td>
-                  <td>{{ new Date(logentry.timestamp).toLocaleTimeString() }}</td>
+                  <td>{{ new Date(logentry.timestamp * 1000).toLocaleTimeString() }}</td>
                   <td :class="{green: logentry.duration <= 9, yellow: 9 > logentry.duration <= 14, red: logentry.duration > 14}">{{ logentry.duration }} Seconds</td>
               </tr>
           </tbody>
