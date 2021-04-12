@@ -1,14 +1,20 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
-import Dashboard from '../views/Dashboard.vue'
+import Log from '../views/Log.vue'
 import Exercise from '../views/Exercise.vue';
 import CorrectSolution from '../views/CorrectSolution.vue'
 import WrongSolution from '../views/WrongSolution.vue'
+import Dashboard from '../views/Dashboard.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
     name: 'Dashboard',
-    component: Dashboard
+    component: Dashboard,
+  },
+  {
+    path: '/log',
+    name: 'Log',
+    component: Log
   },
   {
     path: '/exercise',
