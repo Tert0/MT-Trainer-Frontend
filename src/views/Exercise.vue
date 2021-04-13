@@ -1,8 +1,22 @@
 <template>
   <div>
     <p class="exercise">{{ factor1 }} * {{ factor2 }} = ?</p>
-    <input v-model="user_result" type="number" class="form-control input" autofocus @keydown.enter="check_result()"/>
-    <button class="btn btn-primary" @click="check_result()">Check</button>
+    <div class="w-full px-3">
+      <input
+        class="text-center appearance-none w-1/2 bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-400"
+        placeholder="Your Solution"
+        type="number"
+        v-model="user_result"
+        @keydown.enter="check_result()"
+        autofocus
+      />
+    </div>
+    <button
+      class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+      @click="check_result()"
+    >
+      Check
+    </button>
   </div>
 </template>
 
@@ -21,10 +35,10 @@ export default defineComponent({
   name: "Exercise",
   data(): Record<string, unknown> {
     return {
-      factor1: '?',
-      factor2: '?',
+      factor1: "?",
+      factor2: "?",
       startTime: performance.now(),
-      user_result: '',
+      user_result: "",
     };
   },
   mounted(): void {
@@ -36,27 +50,35 @@ export default defineComponent({
     });
   },
   methods: {
-      check_result() {
-          if (this.user_result === '' || this.user_result === undefined) {
-              return;
-          }
-          const endTime = performance.now();
-          request('/exercise/check', {user_result: this.user_result}, 'POST').then(response => {
-              request('/log/add', {
-                  factor1: this.factor1,
-                  factor2: this.factor2,
-                  user_result: this.user_result,
-                  duration: Math.round((Number(endTime)- Number(this.startTime))/1000)
-                },
-                'POST'
-                ) 
-              if(response.result) {
-                  this.$router.push("/correct")
-              } else {
-                  this.$router.push("/wrong")
-              }
-          })
+    check_result() {
+      if (this.user_result === "" || this.user_result === undefined) {
+        return;
       }
+      const endTime = performance.now();
+      request(
+        "/exercise/check",
+        { user_result: this.user_result },
+        "POST"
+      ).then((response) => {
+        request(
+          "/log/add",
+          {
+            factor1: this.factor1,
+            factor2: this.factor2,
+            user_result: this.user_result,
+            duration: Math.round(
+              (Number(endTime) - Number(this.startTime)) / 1000
+            ),
+          },
+          "POST"
+        );
+        if (response.result) {
+          this.$router.push("/correct");
+        } else {
+          this.$router.push("/wrong");
+        }
+      });
+    },
   },
 });
 </script>
@@ -66,8 +88,8 @@ export default defineComponent({
   font-size: 2em;
 }
 .input {
-    width: 40%;
-    margin-left: 30%;
-    margin-bottom: 10px
+  width: 40%;
+  margin-left: 30%;
+  margin-bottom: 10px;
 }
 </style>
