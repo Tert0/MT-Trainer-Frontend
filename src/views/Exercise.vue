@@ -12,7 +12,7 @@
       />
     </div>
     <button
-      class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+      class="mt-2 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
       @click="check_result()"
     >
       Check
@@ -21,7 +21,7 @@
 </template>
 
 <script lang="ts">
-import request from "../api";
+import { request } from "../api";
 import { defineComponent } from "vue";
 
 interface execise_response {

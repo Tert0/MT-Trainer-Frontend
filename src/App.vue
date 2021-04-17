@@ -1,6 +1,7 @@
 <template>
   <div>
     <div id="nav">
+      <router-link to="/">Home</router-link> |
       <router-link to="/log">Log</router-link> |
       <router-link to="/exercise">Exercise</router-link>
     </div>
@@ -10,7 +11,7 @@
 
 <style lang="scss">
 html, body {
-  @apply bg-gray-800;
+  @apply bg-gray-700;
 }
 #app {
   @apply text-center;
@@ -22,11 +23,16 @@ html, body {
 
   a {
     font-weight: bold;
-    color: #2c3e50;
+    @apply text-gray-300;
 
     &.router-link-exact-active {
-      color: #42b983;
+      @apply text-green-500;
     }
   }
+
+  a:hover {
+    @apply opacity-70;
+  }
+
 }
 </style>

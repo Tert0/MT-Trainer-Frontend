@@ -4,6 +4,7 @@ import Exercise from '../views/Exercise.vue';
 import CorrectSolution from '../views/CorrectSolution.vue'
 import WrongSolution from '../views/WrongSolution.vue'
 import Dashboard from '../views/Dashboard.vue'
+import Login from '../views/Login.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -30,6 +31,11 @@ const routes: Array<RouteRecordRaw> = [
     path: '/wrong',
     name: 'Wrong',
     component: WrongSolution
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: Login
   }
 ]
 

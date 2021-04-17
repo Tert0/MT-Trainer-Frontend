@@ -1,26 +1,24 @@
 <template>
   <div>
-      <table class="table table-dark table-hover">
-          <thead>
-              <tr>
-                  <td>ID</td>
-                  <td>FACTOR 1</td>
-                  <td>FACTOR 2</td>
-                  <td>USER RESULT</td>
-                  <td>CORRECT</td>
-                  <td>TIME</td>
-                  <td>DURATION</td>
-              </tr>
+      <table>
+          <thead class="bg-gray-900 border-b-3 border-gray-700">
+            <td class="w-1/16 border">ID</td>
+            <td class="w-1/8 border">FACTOR 1</td>
+            <td class="w-1/8 border">FACTOR 2</td>
+            <td class="w-1/8 border">USER RESULT</td>
+            <td class="w-1/8 border">CORRECT</td>
+            <td class="w-1/8 border">TIME</td>
+            <td class="w-1/8 border">DURATION</td>
           </thead>
           <tbody>
               <tr v-for="logentry in logs" :key="logentry">
-                  <td>{{ logentry.id }}</td>
-                  <td>{{ logentry.factor1 }}</td>
-                  <td>{{ logentry.factor2 }}</td>
-                  <td>{{ logentry.user_result }}</td>
-                  <td :class="{green: logentry.correct, red: !logentry.correct}">{{ logentry.correct ? 'TRUE' : 'FALSE' }}</td>
-                  <td>{{ new Date(logentry.timestamp * 1000).toLocaleTimeString() }}</td>
-                  <td :class="{green: logentry.duration <= 9, yellow: 9 > logentry.duration <= 14, red: logentry.duration > 14}">{{ logentry.duration }} Seconds</td>
+                  <td class="border">{{ logentry.id }}</td>
+                  <td class="border">{{ logentry.factor1 }}</td>
+                  <td class="border">{{ logentry.factor2 }}</td>
+                  <td class="border">{{ logentry.user_result }}</td>
+                  <td class="border" :class="{green: logentry.correct, red: !logentry.correct}">{{ logentry.correct ? 'TRUE' : 'FALSE' }}</td>
+                  <td class="border">{{ new Date(logentry.timestamp * 1000).toLocaleTimeString() }}</td>
+                  <td  class="border" :class="{green: logentry.duration <= 5, orange: 5 < logentry.duration <= 7 && 5 < logentry.duration, red: logentry.duration > 7}">{{ logentry.duration }} Seconds</td>
               </tr>
           </tbody>
       </table>
@@ -28,7 +26,7 @@
 </template>
 
 <script lang="ts">
-import request from "../api";
+import { request } from "../api";
 import { defineComponent } from "vue";
 
 export default defineComponent({
@@ -53,11 +51,28 @@ export default defineComponent({
     color: green;
 }
 
-.yellow {
-    color: yellow;
+.orange {
+    color: #f99339;
 }
 
 .red {
     color: red;
+}
+
+td {
+    @apply px-10;
+    @apply py-2;
+    @apply border-r-2;
+    @apply border-gray-700;
+}
+
+tr {
+    @apply bg-gray-900;
+    @apply border-b-1;
+    @apply border-gray-700;
+}
+
+tr:hover {
+    @apply bg-gray-800;
 }
 </style>
