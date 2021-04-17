@@ -5,6 +5,7 @@ import CorrectSolution from '../views/CorrectSolution.vue'
 import WrongSolution from '../views/WrongSolution.vue'
 import Dashboard from '../views/Dashboard.vue'
 import Login from '../views/Login.vue'
+import Register from '../views/Register.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -36,6 +37,11 @@ const routes: Array<RouteRecordRaw> = [
     path: '/login',
     name: 'Login',
     component: Login
+  },
+  {
+    path: '/register',
+    name: 'Register',
+    component: Register
   }
 ]
 

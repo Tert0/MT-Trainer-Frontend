@@ -1,8 +1,8 @@
-import axios from 'axios';    
-    
-const BASE_URL = process.env.API_URL || 'http://localhost:9119';    
-    
-async function request(route: string, data={}, method='GET', authorization=true): Promise<any> {    
+import axios from 'axios';
+
+const BASE_URL = process.env.API_URL || 'http://localhost:9119';
+
+async function request(route: string, data = {}, method = 'GET', authorization = true): Promise<any> {
     const token = localStorage.getItem('token');
     let resp_data: Record<string, unknown>;
     resp_data = {};
@@ -19,18 +19,22 @@ async function request(route: string, data={}, method='GET', authorization=true)
             params: data
         }
     }
-    if (method === 'GET') {    
-        resp_data = (await axios.get(`${BASE_URL}${route}`, config)).data;    
+    if (method === 'GET') {
+        resp_data = (await axios.get(`${BASE_URL}${route}`, config)).data;
     }
     else if (method === 'POST') {
-        resp_data = (await axios.post(`${BASE_URL}${route}`, {}, config)).data;    
-    }    
-    return resp_data;    
-}    
+        resp_data = (await axios.post(`${BASE_URL}${route}`, {}, config)).data;
+    }
 
-async function login(username: string, password: string) {
-    let resp = (await axios.post(`${BASE_URL}/token`, {}, {params: {username, password}})).data;
-    return resp;
+    return resp_data;
 }
 
-export {request, login}
+async function login(username: string, password: string) {
+    return (await axios.post(`${BASE_URL}/token`, {}, { params: { username, password } })).data;
+}
+
+async function register(username: string, password: string) {
+    return (await axios.post(`${BASE_URL}/register`, {}, { params: { username, password } })).data;
+}
+
+export { request, login, register }

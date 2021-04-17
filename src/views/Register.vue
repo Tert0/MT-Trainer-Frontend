@@ -1,5 +1,5 @@
 <template>
-  <div class="login">
+  <div class="register">
     <form>
       <input
         class="input"
@@ -7,7 +7,7 @@
         type="text"
         v-model="username"
         autofocus
-        autocomplete="username"
+        autocomplete="new-username"
       />
       <br />
       <input
@@ -15,30 +15,40 @@
         placeholder="Password"
         type="password"
         v-model="password"
-        autocomplete="current-password"
+        autocomplete="new-password"
       />
       <br />
-      <button class="button" @click.prevent="login()">Login</button>
+      <input
+        class="input"
+        placeholder="Repeat Password"
+        type="password"
+        v-model="repeat_password"
+        autocomplete="new-password"
+      />
+      <br />
+      <button class="button" @click.prevent="register()">Login</button>
     </form>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { login } from "../api";
+import { register } from "../api";
 
 export default defineComponent({
-  name: "Login",
+  name: "Register",
   data() {
     return {
       username: "",
       password: "",
+      repeat_password: "",
     };
   },
   methods: {
-    login() {
-      if (this.username == '' || this.password == '') {return;}
-      login(this.username, this.password).then((data) => {
+    register() {
+      if (this.username == '' || this.password == '') return;
+      if (this.password != this.repeat_password) return;
+      register(this.username, this.password).then((data) => {
         localStorage.setItem("token", data.access_token);
         this.$router.push('/');
       });
