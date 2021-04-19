@@ -62,7 +62,7 @@ router.beforeEach(async (to, from, next) => {
     if (!to.meta.requiresAuth) next()
     else {
         try {
-            const auth = await request('/authenicated');
+            const auth = await request('/authenticated');
             next();
         } catch {
             next({name: 'Login'})

@@ -44,7 +44,7 @@ export default defineComponent({
         this.$router.push('/login');
     },
     refresh() {
-        request('/authenicated').then(() => {
+        request('/authenticated').then(() => {
             this.loggedIn = true;
         }).catch(() => {
             this.loggedIn = false;
