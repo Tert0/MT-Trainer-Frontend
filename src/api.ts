@@ -37,4 +37,11 @@ async function register(username: string, password: string) {
     return (await axios.post(`${BASE_URL}/register`, {}, { params: { username, password } })).data;
 }
 
-export { request, login, register }
+async function refreshToken(){
+    const refreshToken = localStorage.getItem('refresh_token');
+    const accessToken = (await request('/refresh', {refresh_token: refreshToken}, 'POST', false)).access_token;
+    console.log(accessToken)
+    localStorage.setItem('token', accessToken);
+}
+
+export { request, login, register, refreshToken }

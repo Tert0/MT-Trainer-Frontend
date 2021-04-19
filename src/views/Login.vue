@@ -40,6 +40,7 @@ export default defineComponent({
       if (this.username == '' || this.password == '') {return;}
       login(this.username, this.password).then((data) => {
         localStorage.setItem("token", data.access_token);
+        localStorage.setItem("refresh_token", data.refresh_token);
         this.$router.push('/');
       });
     },

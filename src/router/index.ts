@@ -7,7 +7,7 @@ import Dashboard from '../views/Dashboard.vue'
 import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
 import RankCard from '../views/RankCard.vue';
-import { request } from '../api'
+import { request, refreshToken } from '../api'
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -70,9 +70,22 @@ router.beforeEach(async (to, from, next) => {
     else {
         try {
             const auth = await request('/authenticated');
+            console.log('Authenticated ... Loding')
             next();
-        } catch {
-            next({name: 'Login'})
+        } catch (e){
+            if(e.response.data.detail === 'Token is expired') {
+                try {
+                    await refreshToken();
+                    console.log('Refreshed .. Loding')
+                    next();
+                } catch {
+                    console.log('Refresh Error ... Redirect')
+                    next({name: 'Login'})
+                }    
+            } else {
+                console.log('Token Invalid .. Redirect')
+                next({name: 'Login'})
+            }
         }
     }
 })

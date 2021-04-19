@@ -41,16 +41,13 @@ export default defineComponent({
     },
     logout() {
         localStorage.removeItem('token')
+        localStorage.removeItem('refresh_token')
         this.$router.push('/login');
     },
     refresh() {
         request('/authenticated').then(() => {
             this.loggedIn = true;
         }).catch(() => {
-            if(this.loggedIn){
-                this.loggedIn = false;
-                this.login()
-            }
             this.loggedIn = false;
         })
     }
