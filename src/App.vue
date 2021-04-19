@@ -4,11 +4,20 @@
       <router-link to="/">Home</router-link> |
       <router-link to="/log">Log</router-link> |
       <router-link to="/exercise">Exercise</router-link>
+      <LoginNavbar />
     </div>
     <router-view />
   </div>
 </template>
+<script lang="ts">
+import { defineComponent } from 'vue';
+import LoginNavbar from './components/LoginNavbar.vue';
 
+export default defineComponent({
+    name: 'App',
+    components: {LoginNavbar}
+})
+</script>
 <style lang="scss">
 html, body {
   @apply bg-gray-700;

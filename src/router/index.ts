@@ -6,42 +6,50 @@ import WrongSolution from '../views/WrongSolution.vue'
 import Dashboard from '../views/Dashboard.vue'
 import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
+import { request } from '../api'
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
     name: 'Dashboard',
     component: Dashboard,
+    meta: { requiresAuth: true }
   },
   {
     path: '/log',
     name: 'Log',
-    component: Log
+    component: Log,
+    meta: { requiresAuth: true }
   },
   {
     path: '/exercise',
     name: 'Exercise',
-    component: Exercise
+    component: Exercise,
+    meta: { requiresAuth: true }
   },
   {
     path: '/correct',
     name: 'Correct',
-    component: CorrectSolution
+    component: CorrectSolution,
+    meta: { requiresAuth: true }
   },
   {
     path: '/wrong',
     name: 'Wrong',
-    component: WrongSolution
+    component: WrongSolution,
+    meta: { requiresAuth: true }
   },
   {
     path: '/login',
     name: 'Login',
-    component: Login
+    component: Login,
+    meta: { requiresAuth: false }
   },
   {
     path: '/register',
     name: 'Register',
-    component: Register
+    component: Register,
+    meta: { requiresAuth: false }
   }
 ]
 
@@ -49,5 +57,18 @@ const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
 })
+
+router.beforeEach(async (to, from, next) => {
+    if (!to.meta.requiresAuth) next()
+    else {
+        try {
+            const auth = await request('/authenicated');
+            next();
+        } catch {
+            next({name: 'Login'})
+        }
+    }
+})
+
 
 export default router
