@@ -3,6 +3,7 @@
     <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/log">Log</router-link> |
+      <router-link to="/rank">Rank</router-link> |
       <router-link to="/exercise">Exercise</router-link>
       <LoginNavbar />
     </div>

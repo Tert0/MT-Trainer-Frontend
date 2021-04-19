@@ -47,6 +47,10 @@ export default defineComponent({
         request('/authenticated').then(() => {
             this.loggedIn = true;
         }).catch(() => {
+            if(this.loggedIn){
+                this.loggedIn = false;
+                this.login()
+            }
             this.loggedIn = false;
         })
     }

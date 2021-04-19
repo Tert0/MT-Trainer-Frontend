@@ -10,8 +10,8 @@
       <div>{{ count }}</div>
     </div>
     <div class="stats-container ml-12">
-      <div>idk the word for that</div>
-      <div>{{ Number((count / points).toFixed(1)) }}</div>
+      <div>Percent</div>
+      <div>{{ Number(((points / count) * 100).toFixed(1)) }}%</div>
     </div>
   </div>
 </template>

@@ -6,6 +6,7 @@ import WrongSolution from '../views/WrongSolution.vue'
 import Dashboard from '../views/Dashboard.vue'
 import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
+import RankCard from '../views/RankCard.vue';
 import { request } from '../api'
 
 const routes: Array<RouteRecordRaw> = [
@@ -50,6 +51,12 @@ const routes: Array<RouteRecordRaw> = [
     name: 'Register',
     component: Register,
     meta: { requiresAuth: false }
+  },
+  {
+    path: '/rank',
+    name: 'RankCard',
+    component: RankCard,
+    meta: { requiresAuth: true }
   }
 ]
 
